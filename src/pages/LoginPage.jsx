@@ -1,0 +1,79 @@
+/* eslint-disable no-unused-vars */
+import { motion } from "framer-motion";
+import { Mail, Lock, Loader } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Input from "../components/Input";
+import { useAuthStore } from "../store/authStore";
+function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, isLoading, redirectPath, clearRedirect } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (redirectPath) {
+      navigate(redirectPath);
+      clearRedirect();
+    }
+  }, [navigate, redirectPath, clearRedirect]);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full max-w-md overflow-hidden bg-gray-800 bg-opacity-50 rounded-lg shadow-xl backdrop-blur-xl backdrop-filter"
+    >
+      <div className="p-6">
+        <h2 className="mb-4 text-3xl font-bold text-center text-transparent bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text">
+          Welcome Back
+        </h2>
+        <form className="space-y-4" onSubmit={handleLogin}>
+          <Input
+            name="email"
+            icon={Mail}
+            placeholder="Email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            name="password"
+            icon={Lock}
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div>
+            <Link
+              to={"/forgot-password"}
+              className="text-sm text-green-500 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+          <button className="w-full py-2 text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+            {isLoading ? <Loader className="mx-auto animate-spin" /> : "Login"}
+          </button>
+        </form>
+      </div>
+      <div className="w-full p-3 text-center text-gray-400 bg-gray-900">
+        Don&apos;t have an account?{" "}
+        <Link to="/signup" className="text-green-500 hover:underline">
+          Signup
+        </Link>
+      </div>
+    </motion.div>
+  );
+}
+
+export default LoginPage;
