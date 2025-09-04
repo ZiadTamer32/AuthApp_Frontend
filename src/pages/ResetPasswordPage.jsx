@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../components/Input";
-import { Loader, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import Button from "../components/Button";
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
@@ -67,17 +68,7 @@ const ResetPasswordPage = () => {
             required
           />
 
-          <button
-            className="w-full py-2 text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <Loader className="mx-auto animate-spin" />
-            ) : (
-              "Set New Password"
-            )}
-          </button>
+          <Button isLoading={isLoading} name="Reset Password" />
         </form>
       </div>
     </motion.div>

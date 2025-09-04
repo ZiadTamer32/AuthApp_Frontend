@@ -2,6 +2,7 @@
 import { Loader } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
 import { motion } from "framer-motion";
+import Button from "../components/Button";
 
 function DashboardPage() {
   const { user, isLoading, logout } = useAuthStore();
@@ -48,13 +49,7 @@ function DashboardPage() {
         transition={{ delay: 0.6 }}
         className="mt-4"
       >
-        <button
-          onClick={handleLogout}
-          disabled={isLoading}
-          className="w-full py-2 text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-        >
-          {isLoading ? <Loader className="mx-auto animate-spin" /> : "Logout"}
-        </button>
+        <Button onClick={handleLogout} isLoading={isLoading} name={"Logout"} />
       </motion.div>
     </div>
   );

@@ -97,8 +97,8 @@ function VerficationEmailPage() {
           ))}
         </div>
         <button
-          disabled={code.some((digit) => digit === "")}
-          className="w-full py-2 text-white transition-colors duration-200 rounded-lg disabled:opacity-50 disabled:cusrsor-not-allowed bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+          disabled={code.some((digit) => digit === "") || isLoading}
+          className="w-full py-2 text-white transition-colors duration-200 rounded-lg disabled:opacity-50 disabled:cusrsor-not-allowed bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <Loader className="mx-auto animate-spin" />

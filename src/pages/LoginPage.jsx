@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { Mail, Lock, Loader } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { useAuthStore } from "../store/authStore";
+import Button from "../components/Button";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,9 +62,7 @@ function LoginPage() {
               Forgot Password?
             </Link>
           </div>
-          <button className="w-full py-2 text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-            {isLoading ? <Loader className="mx-auto animate-spin" /> : "Login"}
-          </button>
+          <Button isLoading={isLoading} name="Login" />
         </form>
       </div>
       <div className="w-full p-3 text-center text-gray-400 bg-gray-900">
